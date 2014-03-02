@@ -6,7 +6,12 @@ from django.forms import ValidationError
 from tekextensions.forms import get_model_form, normalize_model_name
 
 
-def add_new_model(request, model_name, form=None):
+def add_new_model(request, model_name, form=None, template=None):
+    if template:
+        template_name = template
+    else:
+        template_name = 'popup.html'
+
     normal_model_name = normalize_model_name(model_name)
 
     if not form:
@@ -29,4 +34,4 @@ def add_new_model(request, model_name, form=None):
         form = form()
 
     page_context = {'form': form, 'field': normal_model_name}
-    return render_to_response('popup.html', page_context, context_instance=RequestContext(request))
+    return render_to_response(template_name, page_context, context_instance=RequestContext(request))

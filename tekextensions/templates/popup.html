@@ -8,9 +8,7 @@
 <h1>Add {{ field }}</h1>
 <form method="POST" action="/add/{{ field }}">
         {% csrf_token %}
-        <table>
-        {{ form }}
-        </table>
+        {{ form.as_p }}
 <p><input type="submit" /> | <a href="javascript:window.close()">Cancel</a></p>
 </form>
 </body>
